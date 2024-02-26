@@ -1,11 +1,10 @@
-package com.talthur.jwtvalidator.usecase.validators;
+package com.talthur.jwtvalidator.core.usecase.validators;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Component

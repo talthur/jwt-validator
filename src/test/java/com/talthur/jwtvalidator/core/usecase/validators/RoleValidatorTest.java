@@ -1,7 +1,8 @@
-package com.talthur.jwtvalidator.usecase.validators;
+package com.talthur.jwtvalidator.core.usecase.validators;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.talthur.jwtvalidator.core.usecase.validators.RoleValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

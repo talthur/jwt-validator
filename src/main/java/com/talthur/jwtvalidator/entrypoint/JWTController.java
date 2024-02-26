@@ -1,6 +1,6 @@
 package com.talthur.jwtvalidator.entrypoint;
 
-import com.talthur.jwtvalidator.usecase.JWTValidatorUseCase;
+import com.talthur.jwtvalidator.core.usecase.JWTValidatorUseCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

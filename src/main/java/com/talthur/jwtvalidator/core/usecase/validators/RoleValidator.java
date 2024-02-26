@@ -1,15 +1,18 @@
-package com.talthur.jwtvalidator.usecase.validators;
+package com.talthur.jwtvalidator.core.usecase.validators;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.talthur.jwtvalidator.core.model.Roles;
 
-import java.util.Objects;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RoleValidator implements Validator {
 
-    private static Set<String> PERMITTED_ROLES = Set.of("Admin", "Member", "External");
+    private static Set<String> PERMITTED_ROLES = Arrays.stream(Roles.values())
+            .map(Roles::getDescription).collect(Collectors.toSet());
     @Override
     public Boolean validate(DecodedJWT decodedJWT) {
         Optional<Claim> role = Optional.ofNullable(decodedJWT.getClaims().get("Role"));

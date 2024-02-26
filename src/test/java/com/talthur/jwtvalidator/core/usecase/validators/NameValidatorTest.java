@@ -1,7 +1,8 @@
-package com.talthur.jwtvalidator.usecase.validators;
+package com.talthur.jwtvalidator.core.usecase.validators;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.talthur.jwtvalidator.core.usecase.validators.NameValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,7 @@ import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static com.talthur.jwtvalidator.usecase.validators.ClaimValidator.PERMITTED_CLAIMS;
+import static com.talthur.jwtvalidator.core.usecase.validators.ClaimValidator.PERMITTED_CLAIMS;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)

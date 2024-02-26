@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  jwt-validator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jwt-validator
+    container_name: jwt-validator
+    ports:
+      - "8080:8080"  # Adjust the port mapping as needed
+    environment:
+      - JAVA_OPTS=-Xmx512m  # Optional: Set Java options as needed

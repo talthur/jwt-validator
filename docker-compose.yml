@@ -8,6 +8,15 @@ services:
     image: jwt-validator
     container_name: jwt-validator
     ports:
-      - "8080:8080"  # Adjust the port mapping as needed
+      - "8080:8080"
     environment:
-      - JAVA_OPTS=-Xmx512m  # Optional: Set Java options as needed
+      - JAVA_OPTS=-Xmx512m
+
+  prometheus:
+    image: 'prom/prometheus:v2.14.0'
+    ports:
+      - '9090:9090'
+    command: '--config.file=/etc/prometheus/prometheus.yml'
+    volumes:
+      - './prometheus.yml:/etc/prometheus/prometheus.yml'
+

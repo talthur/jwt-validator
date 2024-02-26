@@ -4,13 +4,18 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.talthur.jwtvalidator.core.usecase.validators.Validator;
+import io.micrometer.observation.annotation.Observed;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Observed(name = "validator")
 public class JWTValidatorUseCase {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(JWTValidatorUseCase.class);
 
     private final Set<Validator> validators;
 
@@ -26,7 +31,7 @@ public class JWTValidatorUseCase {
                     .map(validator -> validator.validate(decodedJWT))
                     .filter(result -> !result).findFirst().orElse(true);
         } catch (JWTVerificationException e) {
-            System.out.println(e.getMessage()); //LOGGER
+            LOGGER.error("Exception at decoding JWT. Cause: {}", e.getMessage());
             return false;
         }
 

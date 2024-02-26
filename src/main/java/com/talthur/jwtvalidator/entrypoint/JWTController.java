@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/jwt")
 public class JWTController {
 
-    Logger logger = LoggerFactory.getLogger(JWTController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JWTController.class);
 
     private final JWTValidatorUseCase jwtValidatorUseCase;
 
@@ -23,9 +23,9 @@ public class JWTController {
 
     @PostMapping("/validate")
     public ResponseEntity<JWTValidatedDTO> validate(@RequestBody JWTDTO jwtDto) {
-        logger.info("Validating JTW: {}", jwtDto.token());
+        LOGGER.info("Validating JWT: {}", jwtDto.token());
         Boolean isValid = jwtValidatorUseCase.validateJWT(jwtDto.token());
-        logger.info("Validation result: {} for JWT token: {}",isValid, jwtDto.token());
+        LOGGER.info("Validation result: {} for JWT token: {}",isValid, jwtDto.token());
         return ResponseEntity.ok(new JWTValidatedDTO(jwtDto.token(), isValid));
     }
 

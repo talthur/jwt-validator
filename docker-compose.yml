@@ -12,6 +12,7 @@ services:
     environment:
       - JAVA_OPTS=-Xmx512m
 
+
   prometheus:
     image: 'prom/prometheus:v2.14.0'
     ports:
@@ -28,3 +29,9 @@ services:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    ports:
+      - "9411:9411"
+    command: --logging.level.zipkin2=TRACE

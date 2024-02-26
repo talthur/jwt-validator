@@ -1,4 +1,4 @@
-package com.talthur.jwtvalidator.model;
+package com.talthur.jwtvalidator.usecase.validators;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 

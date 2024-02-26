@@ -3,7 +3,7 @@ package com.talthur.jwtvalidator.usecase;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.talthur.jwtvalidator.model.Validator;
+import com.talthur.jwtvalidator.usecase.validators.Validator;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;

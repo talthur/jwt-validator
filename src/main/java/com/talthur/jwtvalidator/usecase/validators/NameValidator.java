@@ -1,4 +1,4 @@
-package com.talthur.jwtvalidator.model;
+package com.talthur.jwtvalidator.usecase.validators;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Component;
@@ -16,6 +16,6 @@ public class NameValidator implements Validator {
         String regex = "^[^0-9]*$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
-        return matcher.matches();
+        return matcher.matches() && name.length() <= 256;
     }
 }

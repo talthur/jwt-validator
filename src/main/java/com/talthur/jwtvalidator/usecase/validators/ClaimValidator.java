@@ -1,9 +1,10 @@
-package com.talthur.jwtvalidator.model;
+package com.talthur.jwtvalidator.usecase.validators;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class ClaimValidator implements Validator {
@@ -12,6 +13,9 @@ public class ClaimValidator implements Validator {
 
     @Override
     public Boolean validate(DecodedJWT decodedJWT) {
-        return decodedJWT.getClaims().keySet().containsAll(claims);
+
+        Set<String> foundClaims = decodedJWT.getClaims().keySet();
+
+        return foundClaims.containsAll(claims) && foundClaims.size() == 3;
     }
 }

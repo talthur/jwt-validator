@@ -11,6 +11,23 @@
 - Para descer a aplicação, rodar ```make stop```
 - Dentro de ./postman existe a collection de requests para o serviço
 
+- Curl para um caso de sucesso
+```
+curl --location 'http://localhost:8080/v1/jwt/validate' \
+--header 'Content-Type: application/json' \
+--data '{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05sIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg"
+}'
+```
+
+Exemplo de retorno:
+```
+{
+    "jwt": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05sIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg",
+    "valid": true
+}
+```
+
 ## Premissas
 - Endpoint só deve realizar a verificação do JWT
 - As validações podem ser alteradas, acrescentadas, retiradas no futuro

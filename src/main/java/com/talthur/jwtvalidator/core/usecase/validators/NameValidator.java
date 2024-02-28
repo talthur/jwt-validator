@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 @Component
 public class NameValidator implements Validator {
 
+    public static final int MAX_SIZE = 256;
+
     @Override
     public Boolean validate(DecodedJWT decodedJWT) {
         String regex = "^[^0-9]*$";
@@ -19,7 +21,7 @@ public class NameValidator implements Validator {
 
         return name.map(claim -> {
             String claimConverted = claim.asString();
-            return claimConverted.length() <= 256 && pattern.matcher(claimConverted).matches();
+            return claimConverted.length() <= MAX_SIZE && pattern.matcher(claimConverted).matches();
         }).orElse(false);
     }
 }

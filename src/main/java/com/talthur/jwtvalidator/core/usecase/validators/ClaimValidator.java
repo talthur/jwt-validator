@@ -19,6 +19,6 @@ public class ClaimValidator implements Validator {
 
         Set<String> foundClaims = decodedJWT.getClaims().keySet();
 
-        return foundClaims.containsAll(PERMITTED_CLAIMS) && foundClaims.size() == 3;
+        return foundClaims.containsAll(PERMITTED_CLAIMS) && foundClaims.size() == PERMITTED_CLAIMS.size();
     }
 }

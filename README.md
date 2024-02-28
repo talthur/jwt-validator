@@ -22,3 +22,9 @@
 - Prometheus e Grafana para métricas (sobe container no docker-compose)
 - Zipkin para trace (sobe container no docker-compose)
 - Logback para logs
+
+## Métodos
+- ClaimValidator.validate() -> retorna se no JWT possui as 3 claims necessárias e se possui um tamanho de apenas 3.
+- NameValidator.validate() -> caso não exista um Claim Name, retorna False. Caso exista, valida utilizando um regex para verificação de números.
+- RoleValidator.validate() -> caso não exista um Claim Role, retorna False. Caso exista, valida se o valor é algum dos permitidos, iterando sobre os valores permitidos para isso.
+- SeedValidator.validate() -> caso não exista um Claim Sole, retorna False. Caso exista, valida se o número é divisivel por algum outro número que não ele mesmo ou 1.

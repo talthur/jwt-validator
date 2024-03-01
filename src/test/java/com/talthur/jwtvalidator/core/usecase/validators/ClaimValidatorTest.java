@@ -1,12 +1,10 @@
 package com.talthur.jwtvalidator.core.usecase.validators;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.talthur.jwtvalidator.core.usecase.validators.ClaimValidator;
+import com.talthur.jwtvalidator.core.model.JWT;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -19,8 +17,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class ClaimValidatorTest {
 
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private DecodedJWT decodedJWT;
+    @Mock
+    private JWT jwt;
 
     private ClaimValidator subject;
 
@@ -31,36 +29,36 @@ class ClaimValidatorTest {
 
     @Test
     public void shouldReturnTrueWhenValidClaimSizeAndClaimNames() {
-        when(decodedJWT.getClaims().keySet()).thenReturn(PERMITTED_CLAIMS);
+        when(jwt.getOriginalClaims()).thenReturn(PERMITTED_CLAIMS);
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertTrue(result);
     }
 
     @Test
     public void shouldReturnFalseWhenClaimSizeAbove3() {
-        when(decodedJWT.getClaims().keySet()).thenReturn(Set.of("1", "2", "3", "4"));
+        when(jwt.getOriginalClaims()).thenReturn(Set.of("1", "2", "3", "4"));
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertFalse(result);
     }
 
     @Test
     public void shouldReturnFalseWhenInvalidClaim() {
-        when(decodedJWT.getClaims().keySet()).thenReturn(Set.of("Banana", "Role", "Seed"));
+        when(jwt.getOriginalClaims()).thenReturn(Set.of("Banana", "Role", "Seed"));
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertFalse(result);
     }
 
     @Test
     public void shouldReturnFalseWhenEmptyClaims() {
-        when(decodedJWT.getClaims()).thenReturn(Collections.emptyMap());
+        when(jwt.getOriginalClaims()).thenReturn(Collections.EMPTY_SET);
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertFalse(result);
 

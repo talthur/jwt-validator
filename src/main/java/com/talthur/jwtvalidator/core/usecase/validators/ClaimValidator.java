@@ -1,7 +1,7 @@
 package com.talthur.jwtvalidator.core.usecase.validators;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
 import com.talthur.jwtvalidator.core.model.Claims;
+import com.talthur.jwtvalidator.core.model.JWT;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -15,10 +15,8 @@ public class ClaimValidator implements Validator {
             .map(Claims::getDescription).collect(Collectors.toSet());
 
     @Override
-    public Boolean validate(DecodedJWT decodedJWT) {
-
-        Set<String> foundClaims = decodedJWT.getClaims().keySet();
-
-        return foundClaims.containsAll(PERMITTED_CLAIMS) && foundClaims.size() == PERMITTED_CLAIMS.size();
+    public Boolean validate(JWT decodedJWT) {
+        return decodedJWT.getOriginalClaims().containsAll(PERMITTED_CLAIMS)
+                && decodedJWT.getOriginalClaims().size() == PERMITTED_CLAIMS.size();
     }
 }

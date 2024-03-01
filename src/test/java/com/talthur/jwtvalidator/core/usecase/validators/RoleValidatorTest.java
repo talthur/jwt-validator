@@ -1,27 +1,22 @@
 package com.talthur.jwtvalidator.core.usecase.validators;
 
-import com.auth0.jwt.interfaces.Claim;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import com.talthur.jwtvalidator.core.usecase.validators.RoleValidator;
+import com.talthur.jwtvalidator.core.model.JWT;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class RoleValidatorTest {
 
-    public static final String ROLE = "Role";
-    @Mock(answer = Answers.RETURNS_DEEP_STUBS)
-    private DecodedJWT decodedJWT;
-
     @Mock
-    private Claim claim;
+    private JWT jwt;
 
     private RoleValidator subject;
 
@@ -32,49 +27,45 @@ class RoleValidatorTest {
 
     @Test
     public void shouldReturnTrueWhenRoleIsAdmin() {
-        when(decodedJWT.getClaims().get(ROLE)).thenReturn(claim);
-        when(claim.asString()).thenReturn("Admin");
+        when(jwt.getRole()).thenReturn(Optional.of("Admin"));
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertTrue(result);
     }
 
     @Test
     public void shouldReturnTrueWhenRoleIsMember() {
-        when(decodedJWT.getClaims().get(ROLE)).thenReturn(claim);
-        when(claim.asString()).thenReturn("Member");
+        when(jwt.getRole()).thenReturn(Optional.of("Member"));
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertTrue(result);
     }
 
     @Test
     public void shouldReturnTrueWhenRoleIsExternal() {
-        when(decodedJWT.getClaims().get(ROLE)).thenReturn(claim);
-        when(claim.asString()).thenReturn("External");
+        when(jwt.getRole()).thenReturn(Optional.of("External"));
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertTrue(result);
     }
 
     @Test
     public void shouldReturnFalseWhenRoleIsInvalid() {
-        when(decodedJWT.getClaims().get(ROLE)).thenReturn(claim);
-        when(claim.asString()).thenReturn("Banana");
+        when(jwt.getRole()).thenReturn(Optional.of("Banana"));
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertFalse(result);
     }
 
     @Test
-    public void shouldReturnFalseWhenRoleIsNull() {
-        when(decodedJWT.getClaims().get(ROLE)).thenReturn(null);
+    public void shouldReturnFalseWhenRoleIsEmpty() {
+        when(jwt.getRole()).thenReturn(Optional.empty());
 
-        Boolean result = subject.validate(decodedJWT);
+        Boolean result = subject.validate(jwt);
 
         Assertions.assertFalse(result);
     }

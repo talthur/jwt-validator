@@ -1,8 +1,8 @@
 package com.talthur.jwtvalidator.core.usecase;
 
-import com.auth0.jwt.JWT;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.talthur.jwtvalidator.core.model.JWT;
 import com.talthur.jwtvalidator.core.usecase.validators.Validator;
 import io.micrometer.observation.annotation.Observed;
 import org.slf4j.Logger;
@@ -26,9 +26,9 @@ public class JWTValidatorUseCase {
     public Boolean validateJWT(String token) {
 
         try {
-            DecodedJWT decodedJWT = JWT.decode(token);
+            DecodedJWT decodedJWT = com.auth0.jwt.JWT.decode(token);
             return validators.stream()
-                    .map(validator -> validator.validate(decodedJWT))
+                    .map(validator -> validator.validate(new JWT(decodedJWT)))
                     .filter(result -> !result).findFirst().orElse(true);
         } catch (JWTVerificationException e) {
             LOGGER.error("Exception at decoding JWT. Cause: {}", e.getMessage());

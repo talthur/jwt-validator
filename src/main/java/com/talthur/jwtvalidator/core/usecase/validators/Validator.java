@@ -1,8 +1,9 @@
 package com.talthur.jwtvalidator.core.usecase.validators;
 
-import com.auth0.jwt.interfaces.DecodedJWT;
+
+import com.talthur.jwtvalidator.core.model.JWT;
 
 public interface Validator {
 
-    Boolean validate(DecodedJWT decodedJWT);
+    Boolean validate(JWT decodedJWT);
 }

@@ -16,20 +16,20 @@ public class JWT {
     public JWT(DecodedJWT decodedJWT) {
         this.originalClaims = decodedJWT.getClaims().keySet();
         this.role = decodedJWT.getClaims().get(Claims.ROLE.getDescription()).asString();
-        this.seed = decodedJWT.getClaims().get(Claims.SEED.getDescription()).asInt();
+        this.seed = Integer.valueOf(decodedJWT.getClaims().get(Claims.SEED.getDescription()).asString());
         this.name = decodedJWT.getClaims().get(Claims.NAME.getDescription()).asString();
     }
 
     public Optional<String> getRole() {
-        return Optional.of(role);
+        return Optional.ofNullable(role);
     }
 
     public Optional<Integer> getSeed() {
-        return Optional.of(seed);
+        return Optional.ofNullable(seed);
     }
 
     public Optional<String> getName() {
-        return Optional.of(name);
+        return Optional.ofNullable(name);
     }
 
     public Set<String> getOriginalClaims() {

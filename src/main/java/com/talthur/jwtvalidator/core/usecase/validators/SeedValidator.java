@@ -1,7 +1,9 @@
 package com.talthur.jwtvalidator.core.usecase.validators;
 
 import com.talthur.jwtvalidator.core.model.JWT;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SeedValidator implements Validator {
     @Override
     public Boolean validate(JWT decodedJWT) {
